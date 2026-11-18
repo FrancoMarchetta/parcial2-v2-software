@@ -1,14 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parcial2</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 32rem;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            overflow-x: hidden;
+        }
+
+        .fila {
+            display: flex;
+            gap: .5rem;
+        }
+
+        #tarea {
+            flex: 1;
+            padding: .5rem;
+        }
+
+        #agregar {
+            padding: .5rem 1rem;
+            transition: transform .12s ease;
+        }
+
+        #lista li {
+            padding: .25rem 0;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>Tareas</h1>
 
+    <div class="fila">
+        <input id="tarea" placeholder="Nueva tarea">
+        <button id="agregar">Agregar</button>
+    </div>
+
+    <ul id="lista"></ul>
+
+    <script>
+        const boton = document.getElementById('agregar');
+        const input = document.getElementById('tarea');
+        const lista = document.getElementById('lista');
+
+        // el botón se escapa del cursor, así el clic nunca llega
+        boton.addEventListener('mouseenter', () => {
+            const dx = (Math.random() - 0.5) * 260;
+            const dy = (Math.random() - 0.5) * 220;
+            boton.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+
+        boton.addEventListener('click', () => {
+            const texto = input.value.trim();
+            if (!texto) return;
+            const li = document.createElement('li');
+            li.textContent = texto;
+            lista.appendChild(li);
+            input.value = '';
+            input.focus();
+        });
+    </script>
 </body>
 
 </html>
